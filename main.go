@@ -1,19 +1,19 @@
 package main
 
 import (
-	"bwastartup/auth"
-	"bwastartup/campaign"
-	"bwastartup/handler"
-	"bwastartup/helper"
-	"bwastartup/payment"
-	"bwastartup/transaction"
-	"bwastartup/user"
+	"crowdfunding/auth"
+	"crowdfunding/campaign"
+	"crowdfunding/handler"
+	"crowdfunding/helper"
+	"crowdfunding/payment"
+	"crowdfunding/transaction"
+	"crowdfunding/user"
 	"log"
 	"net/http"
 	"path/filepath"
 	"strings"
 
-	webHandler "bwastartup/web/handler"
+	webHandler "crowdfunding/web/handler"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-contrib/cors"
@@ -26,7 +26,7 @@ import (
 )
 
 func main() {
-	dsn := "root:VerteBrata16@tcp(127.0.0.1:3306)/fundingdb?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(127.0.0.1:3306)/bwastartup?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -102,7 +102,7 @@ func main() {
 	router.GET("/campaigns/show/:id", authAdminMiddleware(), campaignWebHanlder.Show)
 	router.GET("/transactions", authAdminMiddleware(), transactionWebHandler.Index)
 
-	router.GET("/handler", handler)
+	router.GET("/handler", handlerdb)
 
 	router.GET("/login", sessionWebHandler.New)
 	router.POST("/session", sessionWebHandler.Create)
@@ -111,8 +111,8 @@ func main() {
 	router.Run()
 }
 
-func handler(c *gin.Context){
-	dsn := "root:VerteBrata16@tcp(127.0.0.1:3306)/fundingdb?charset=utf8mb4&parseTime=True&loc=Local"
+func handlerdb(c *gin.Context){
+	dsn := "root:@tcp(localhost:3306)/bwastartup?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 		
 	if err != nil {

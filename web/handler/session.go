@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"bwastartup/user"
+	"crowdfunding/user"
 	"net/http"
 
 	"github.com/gin-contrib/sessions"

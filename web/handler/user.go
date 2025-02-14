@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"bwastartup/user"
+	"crowdfunding/user"
 	"fmt"
 	"net/http"
 	"strconv"

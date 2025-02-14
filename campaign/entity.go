@@ -1,7 +1,7 @@
 package campaign
 
 import (
-	"bwastartup/user"
+	"crowdfunding/user"
 	"time"
 
 	"github.com/leekchan/accounting"
